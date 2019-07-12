@@ -1,9 +1,6 @@
 package com.changhr.netty.im.netty.utils;
 
-import com.changhr.netty.im.netty.pack.Command;
-import com.changhr.netty.im.netty.pack.LoginRequestPacket;
-import com.changhr.netty.im.netty.pack.LoginResponsePacket;
-import com.changhr.netty.im.netty.pack.Packet;
+import com.changhr.netty.im.netty.pack.*;
 import com.changhr.netty.im.netty.serializer.JSONSerializer;
 import com.changhr.netty.im.netty.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -39,6 +36,8 @@ public class PacketCodeC {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
         packetTypeMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
+        packetTypeMap.put(Command.MESSAGE_REQUEST, MessageRequestPacket.class);
+        packetTypeMap.put(Command.MESSAGE_RESPONSE, MessageResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();

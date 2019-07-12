@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty;
 
-import com.changhr.netty.im.netty.handler.HelloServerHandler;
+import com.changhr.netty.im.netty.handler.*;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -27,7 +27,10 @@ public class NettyServer {
                         @Override
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                             ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                            pipeline.addLast(new HelloServerHandler());
+                            pipeline.addLast(new PacketDecoder());
+                            pipeline.addLast(new LoginRequestHandler());
+                            pipeline.addLast(new MessageRequestHandler());
+                            pipeline.addLast(new PacketEncoder());
                         }
                     });
             serverBootstrap.option(ChannelOption.SO_BACKLOG, 1024);
