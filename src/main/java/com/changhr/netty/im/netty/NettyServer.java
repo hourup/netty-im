@@ -6,6 +6,7 @@ import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.string.StringDecoder;
 
 /**
@@ -27,6 +28,7 @@ public class NettyServer {
                         @Override
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                             ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                            pipeline.addLast(new Spliter());
                             pipeline.addLast(new PacketDecoder());
                             pipeline.addLast(new LoginRequestHandler());
                             pipeline.addLast(new MessageRequestHandler());
