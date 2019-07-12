@@ -1,4 +1,4 @@
-package com.changhr.netty.im.netty.handler;
+package com.changhr.netty.im.netty.handler.server;
 
 import com.changhr.netty.im.netty.pack.MessageRequestPacket;
 import com.changhr.netty.im.netty.pack.MessageResponsePacket;

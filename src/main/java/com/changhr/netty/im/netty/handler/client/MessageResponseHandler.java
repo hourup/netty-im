@@ -1,4 +1,4 @@
-package com.changhr.netty.im.netty.handler;
+package com.changhr.netty.im.netty.handler.client;
 
 import com.changhr.netty.im.netty.pack.MessageResponsePacket;
 import io.netty.channel.ChannelHandlerContext;

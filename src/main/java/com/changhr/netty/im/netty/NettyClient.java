@@ -1,6 +1,8 @@
 package com.changhr.netty.im.netty;
 
 import com.changhr.netty.im.netty.handler.*;
+import com.changhr.netty.im.netty.handler.client.LoginResponseHandler;
+import com.changhr.netty.im.netty.handler.client.MessageResponseHandler;
 import com.changhr.netty.im.netty.pack.MessageRequestPacket;
 import com.changhr.netty.im.netty.utils.LoginUtil;
 import com.changhr.netty.im.netty.utils.PacketCodeC;
@@ -9,9 +11,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 
-import java.net.InetSocketAddress;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

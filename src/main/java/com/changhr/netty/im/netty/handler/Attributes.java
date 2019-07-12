@@ -1,5 +1,6 @@
 package com.changhr.netty.im.netty.handler;
 
+import com.changhr.netty.im.netty.session.UserSession;
 import io.netty.util.AttributeKey;
 
 /**
@@ -9,4 +10,7 @@ import io.netty.util.AttributeKey;
 public interface Attributes {
 
     AttributeKey<Boolean> LOGIN = AttributeKey.newInstance("login");
+
+    AttributeKey<UserSession> SESSION = AttributeKey.newInstance("session");
+
 }

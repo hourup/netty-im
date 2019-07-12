@@ -1,4 +1,4 @@
-package com.changhr.netty.im.netty.handler;
+package com.changhr.netty.im.netty.handler.client;
 
 import com.changhr.netty.im.netty.pack.LoginRequestPacket;
 import com.changhr.netty.im.netty.pack.LoginResponsePacket;
@@ -7,7 +7,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.time.Instant;
-import java.util.UUID;
 
 /**
  * @author changhr
@@ -20,8 +19,7 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
         System.out.println(Instant.now().toString() + ": client login...");
 
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-        loginRequestPacket.setUserId(UUID.randomUUID().toString())
-                .setUsername("changhr")
+        loginRequestPacket.setUsername("changhr")
                 .setPassword("pwd");
 
         ctx.channel().writeAndFlush(loginRequestPacket);
@@ -30,8 +28,8 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LoginResponsePacket loginRspPacket) throws Exception {
         if (loginRspPacket.isSuccess()) {
-            LoginUtil.markAsLogin(ctx.channel());
             System.out.println(Instant.now().toString() + ": 客户端登录成功");
+            LoginUtil.markAsLogin(ctx.channel());
         } else {
             System.out.println(Instant.now().toString() + ": 客户端登录失败，原因: " + loginRspPacket.getReason());
         }

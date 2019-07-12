@@ -7,8 +7,6 @@ import lombok.experimental.Accessors;
 @Accessors(chain = true)
 public class LoginRequestPacket extends Packet {
 
-    private String userId;
-
     private String username;
 
     private String password;

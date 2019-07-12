@@ -1,13 +1,15 @@
 package com.changhr.netty.im.netty;
 
 import com.changhr.netty.im.netty.handler.*;
+import com.changhr.netty.im.netty.handler.server.AuthHandler;
+import com.changhr.netty.im.netty.handler.LifeCycleTestHandler;
+import com.changhr.netty.im.netty.handler.server.LoginRequestHandler;
+import com.changhr.netty.im.netty.handler.server.MessageRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
-import io.netty.handler.codec.string.StringDecoder;
 
 /**
  * @author changhr
@@ -28,9 +30,11 @@ public class NettyServer {
                         @Override
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                             ChannelPipeline pipeline = nioSocketChannel.pipeline();
+                            pipeline.addLast(new LifeCycleTestHandler());
                             pipeline.addLast(new Spliter());
                             pipeline.addLast(new PacketDecoder());
                             pipeline.addLast(new LoginRequestHandler());
+                            pipeline.addLast(new AuthHandler());
                             pipeline.addLast(new MessageRequestHandler());
                             pipeline.addLast(new PacketEncoder());
                         }
