@@ -1,26 +1,32 @@
 package com.changhr.netty.im.netty;
 
+import com.changhr.netty.im.netty.command.ConsoleCommandManager;
+import com.changhr.netty.im.netty.command.LoginConsoleCommand;
 import com.changhr.netty.im.netty.handler.*;
+import com.changhr.netty.im.netty.handler.client.CreateGroupResponseHandler;
 import com.changhr.netty.im.netty.handler.client.LoginResponseHandler;
+import com.changhr.netty.im.netty.handler.client.LogoutResponseHandler;
 import com.changhr.netty.im.netty.handler.client.MessageResponseHandler;
-import com.changhr.netty.im.netty.pack.MessageRequestPacket;
-import com.changhr.netty.im.netty.utils.LoginUtil;
-import com.changhr.netty.im.netty.utils.PacketCodeC;
+import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.buffer.ByteBuf;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author changhr
  * @create 2019-07-11 13:00
  */
+@Slf4j
 public class NettyClient {
+
+    private static final int MAX_RETRY = 3;
 
     public static void main(String[] args) throws InterruptedException {
         Bootstrap bootstrap = new Bootstrap();
@@ -36,7 +42,9 @@ public class NettyClient {
                         pipeline.addLast(new Spliter());
                         pipeline.addLast(new PacketDecoder());
                         pipeline.addLast(new LoginResponseHandler());
+                        pipeline.addLast(new CreateGroupResponseHandler());
                         pipeline.addLast(new MessageResponseHandler());
+                        pipeline.addLast(new LogoutResponseHandler());
                         pipeline.addLast(new PacketEncoder());
                     }
                 });
@@ -54,30 +62,42 @@ public class NettyClient {
                 Channel channel = ((ChannelFuture) future).channel();
                 // 连接成功之后，启动控制台线程
                 startConsoleThread(channel);
+            } else if (retry == 0) {
+                System.err.println("retry count is 0, give up connect.");
             } else {
-                System.out.println("connect failed! retrying...");
-                if (retry > 0) {
-                    connect(bootstrap, host, port, retry - 1);
-                }
+                System.err.println("connect failed! retrying...");
+                // 第几次重连
+                int order = (MAX_RETRY - retry) + 1;
+                // 本次重连间隔
+                int delay = 1 << order;
+                bootstrap.config().group().schedule(() ->
+                        connect(bootstrap, host, port, retry - 1), delay, TimeUnit.SECONDS);
             }
         });
     }
 
     private static void startConsoleThread(Channel channel) {
-        ExecutorService executorService = Executors.newSingleThreadExecutor();
+        ConsoleCommandManager consoleCommandManager = new ConsoleCommandManager();
+        LoginConsoleCommand loginConsoleCommand = new LoginConsoleCommand();
+        ExecutorService executorService = Executors.newCachedThreadPool();
+        Scanner scanner = new Scanner(System.in);
         executorService.execute(() -> {
             while (!Thread.interrupted()) {
-                if (LoginUtil.hasLogin(channel)) {
-                    System.out.println("输入消息发送至服务器: ");
-                    Scanner scanner = new Scanner(System.in);
-                    String line = scanner.nextLine();
-
-                    MessageRequestPacket requestPacket = new MessageRequestPacket(line);
-                    ByteBuf buffer = PacketCodeC.getInstance().encode(channel.alloc().buffer(), requestPacket);
-                    channel.writeAndFlush(buffer);
+                if (!SessionUtil.hasLogin(channel)) {
+                    loginConsoleCommand.exec(scanner, channel);
+                } else {
+                    consoleCommandManager.exec(scanner, channel);
                 }
             }
         });
+    }
+
+    private static void waitForLoginResponse() {
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException ignored) {
+            log.error("连接被忽略", ignored);
+        }
     }
 
 }

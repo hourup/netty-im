@@ -13,6 +13,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class MessageRequestPacket extends Packet {
 
+    private String toUserId;
+
     private String message;
 
     @Override
