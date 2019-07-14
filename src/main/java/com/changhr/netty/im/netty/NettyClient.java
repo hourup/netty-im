@@ -36,8 +36,8 @@ public class NettyClient {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                         ChannelPipeline pipeline = nioSocketChannel.pipeline();
-                        pipeline.addLast(new Spliter());
-                        pipeline.addLast(new PacketDecoder());
+                        pipeline.addLast(new Splitter());
+                        pipeline.addLast(PacketDecoder.INSTANCE);
                         pipeline.addLast(new LoginResponseHandler());
                         pipeline.addLast(new CreateGroupResponseHandler());
                         pipeline.addLast(new MessageResponseHandler());
@@ -46,7 +46,7 @@ public class NettyClient {
                         pipeline.addLast(new QuitGroupResponseHandler());
                         pipeline.addLast(new ListGroupMembersResponseHandler());
                         pipeline.addLast(new LogoutResponseHandler());
-                        pipeline.addLast(new PacketEncoder());
+                        pipeline.addLast(PacketEncoder.INSTANCE);
                     }
                 });
 

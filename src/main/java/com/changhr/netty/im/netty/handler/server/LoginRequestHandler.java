@@ -5,15 +5,28 @@ import com.changhr.netty.im.netty.pack.LoginResponsePacket;
 import com.changhr.netty.im.netty.session.UserSession;
 import com.changhr.netty.im.netty.utils.IDUtil;
 import com.changhr.netty.im.netty.utils.SessionUtil;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
+ * 处理登录请求的 handler
+ * 加上注解标识，表明 handler 是可以多个 channel 共享的
+ *
  * @author changhr
  * @create 2019-07-12 10:33
  */
 @SuppressWarnings("Duplicates")
+@ChannelHandler.Sharable
 public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginRequestPacket> {
+
+    /**
+     * 构造单例
+     */
+    public static final LoginRequestHandler INSTANCE = new LoginRequestHandler();
+
+    protected LoginRequestHandler() {
+    }
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {

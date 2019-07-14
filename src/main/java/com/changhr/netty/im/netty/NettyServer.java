@@ -2,7 +2,6 @@ package com.changhr.netty.im.netty;
 
 import com.changhr.netty.im.netty.handler.*;
 import com.changhr.netty.im.netty.handler.server.*;
-import com.changhr.netty.im.netty.handler.LifeCycleTestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -29,10 +28,10 @@ public class NettyServer {
                         protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                             ChannelPipeline pipeline = nioSocketChannel.pipeline();
 //                            pipeline.addLast(new LifeCycleTestHandler());
-                            pipeline.addLast(new Spliter());
-                            pipeline.addLast(new PacketDecoder());
-                            pipeline.addLast("login", new LoginRequestHandler());
-                            pipeline.addLast(new AuthHandler());
+                            pipeline.addLast(new Splitter());
+                            pipeline.addLast(PacketCodecHandler.INSTANCE);
+                            pipeline.addLast("login", LoginRequestHandler.INSTANCE);
+                            pipeline.addLast(AuthHandler.INSTANCE);
                             pipeline.addLast(new CreateGroupRequestHandler());
                             pipeline.addLast(new JoinGroupRequestHandler());
                             pipeline.addLast(new GroupMessageRequestHandler());
@@ -40,7 +39,6 @@ public class NettyServer {
                             pipeline.addLast(new ListGroupMembersRequestHandler());
                             pipeline.addLast(new QuitGroupRequestHandler());
                             pipeline.addLast(new LogoutRequestHandler());
-                            pipeline.addLast(new PacketEncoder());
                         }
                     });
             serverBootstrap.option(ChannelOption.SO_BACKLOG, 1024);
