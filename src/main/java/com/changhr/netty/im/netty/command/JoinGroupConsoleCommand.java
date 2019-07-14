@@ -15,7 +15,7 @@ public class JoinGroupConsoleCommand implements ConsoleCommand {
         JoinGroupRequestPacket joinGroupReqPacket = new JoinGroupRequestPacket();
 
         System.out.println("输入 groupId，加入群聊：");
-        String groupId = scanner.nextLine();
+        String groupId = scanner.next();
 
         joinGroupReqPacket.setGroupId(groupId);
         channel.writeAndFlush(joinGroupReqPacket);

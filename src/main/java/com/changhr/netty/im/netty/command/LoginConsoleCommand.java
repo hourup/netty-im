@@ -18,7 +18,7 @@ public class LoginConsoleCommand implements ConsoleCommand {
         LoginRequestPacket loginReqPacket = new LoginRequestPacket();
 
         System.out.println("输入用户名登录: ");
-        loginReqPacket.setUsername(scanner.nextLine())
+        loginReqPacket.setUsername(scanner.next())
                 .setPassword("pwd");
 
         // 发送登录数据包

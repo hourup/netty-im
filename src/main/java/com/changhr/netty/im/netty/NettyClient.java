@@ -3,10 +3,7 @@ package com.changhr.netty.im.netty;
 import com.changhr.netty.im.netty.command.ConsoleCommandManager;
 import com.changhr.netty.im.netty.command.LoginConsoleCommand;
 import com.changhr.netty.im.netty.handler.*;
-import com.changhr.netty.im.netty.handler.client.CreateGroupResponseHandler;
-import com.changhr.netty.im.netty.handler.client.LoginResponseHandler;
-import com.changhr.netty.im.netty.handler.client.LogoutResponseHandler;
-import com.changhr.netty.im.netty.handler.client.MessageResponseHandler;
+import com.changhr.netty.im.netty.handler.client.*;
 import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -44,6 +41,10 @@ public class NettyClient {
                         pipeline.addLast(new LoginResponseHandler());
                         pipeline.addLast(new CreateGroupResponseHandler());
                         pipeline.addLast(new MessageResponseHandler());
+                        pipeline.addLast(new GroupMessageResponseHandler());
+                        pipeline.addLast(new JoinGroupResponseHandler());
+                        pipeline.addLast(new QuitGroupResponseHandler());
+                        pipeline.addLast(new ListGroupMembersResponseHandler());
                         pipeline.addLast(new LogoutResponseHandler());
                         pipeline.addLast(new PacketEncoder());
                     }

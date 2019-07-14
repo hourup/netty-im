@@ -31,11 +31,14 @@ public class NettyServer {
 //                            pipeline.addLast(new LifeCycleTestHandler());
                             pipeline.addLast(new Spliter());
                             pipeline.addLast(new PacketDecoder());
-                            pipeline.addLast(new LoginRequestHandler());
+                            pipeline.addLast("login", new LoginRequestHandler());
                             pipeline.addLast(new AuthHandler());
                             pipeline.addLast(new CreateGroupRequestHandler());
                             pipeline.addLast(new JoinGroupRequestHandler());
+                            pipeline.addLast(new GroupMessageRequestHandler());
                             pipeline.addLast(new MessageRequestHandler());
+                            pipeline.addLast(new ListGroupMembersRequestHandler());
+                            pipeline.addLast(new QuitGroupRequestHandler());
                             pipeline.addLast(new LogoutRequestHandler());
                             pipeline.addLast(new PacketEncoder());
                         }

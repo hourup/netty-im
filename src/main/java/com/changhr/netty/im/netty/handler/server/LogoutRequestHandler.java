@@ -17,12 +17,10 @@ public class LogoutRequestHandler extends SimpleChannelInboundHandler<LogoutRequ
         LogoutResponsePacket logoutRspPacket = new LogoutResponsePacket();
 
         SessionUtil.unBindSession(ctx.channel());
-        if (!SessionUtil.hasLogin(ctx.channel())) {
-            logoutRspPacket.setSuccess(true);
-        } else {
-            logoutRspPacket.setSuccess(false);
-            logoutRspPacket.setReason("用户注销失败！");
-        }
+        logoutRspPacket.setSuccess(true);
+
+        ctx.pipeline().addAfter(ctx.executor(), "login", "auth", new AuthHandler());
+
         ctx.channel().writeAndFlush(logoutRspPacket);
     }
 }

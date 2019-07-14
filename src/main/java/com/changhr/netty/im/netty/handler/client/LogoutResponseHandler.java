@@ -14,8 +14,9 @@ public class LogoutResponseHandler extends SimpleChannelInboundHandler<LogoutRes
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, LogoutResponsePacket logoutRspPacket) throws Exception {
         if (logoutRspPacket.isSuccess()) {
+            String userName = SessionUtil.getSession(ctx.channel()).getUserName();
             SessionUtil.unBindSession(ctx.channel());
-            System.out.println("客户端" + SessionUtil.getSession(ctx.channel()).getUserName() + "已登出！");
+            System.out.println("客户端" + userName + "已登出！");
         } else {
             System.out.println("客户端注销失败，请重试：" + logoutRspPacket.getReason());
         }
