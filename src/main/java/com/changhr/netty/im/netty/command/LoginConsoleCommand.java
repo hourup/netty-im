@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.command;
 
-import com.changhr.netty.im.netty.pack.LoginRequestPacket;
+import com.changhr.netty.im.netty.pack.client.LoginRequestPacket;
 import io.netty.channel.Channel;
 import lombok.extern.slf4j.Slf4j;
 

@@ -5,6 +5,7 @@ package com.changhr.netty.im.netty.pack;
  * @create 2019-07-11 17:28
  */
 public interface Command {
+    
     Byte LOGIN_REQUEST = 1;
 
     Byte LOGIN_RESPONSE = 2;
@@ -36,4 +37,8 @@ public interface Command {
     Byte GROUP_MESSAGE_REQUEST = 15;
 
     Byte GROUP_MESSAGE_RESPONSE = 16;
+
+    Byte HEARTBEAT_REQUEST = 17;
+
+    Byte HEARTBEAT_RESPONSE = 18;
 }

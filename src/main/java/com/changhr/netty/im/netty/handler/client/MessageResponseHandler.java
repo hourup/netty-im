@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.handler.client;
 
-import com.changhr.netty.im.netty.pack.MessageResponsePacket;
+import com.changhr.netty.im.netty.pack.server.MessageResponsePacket;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 

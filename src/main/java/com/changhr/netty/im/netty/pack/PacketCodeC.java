@@ -1,5 +1,7 @@
 package com.changhr.netty.im.netty.pack;
 
+import com.changhr.netty.im.netty.pack.client.*;
+import com.changhr.netty.im.netty.pack.server.*;
 import com.changhr.netty.im.netty.serializer.JSONSerializer;
 import com.changhr.netty.im.netty.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
@@ -48,6 +50,8 @@ public class PacketCodeC {
         packetTypeMap.put(Command.LIST_GROUP_MEMBERS_RESPONSE, ListGroupMembersResponsePacket.class);
         packetTypeMap.put(Command.GROUP_MESSAGE_REQUEST, GroupMessageRequestPacket.class);
         packetTypeMap.put(Command.GROUP_MESSAGE_RESPONSE, GroupMessageResponsePacket.class);
+        packetTypeMap.put(Command.HEARTBEAT_REQUEST, HeartBeatRequestPacket.class);
+        packetTypeMap.put(Command.HEARTBEAT_RESPONSE, HeartBeatResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
@@ -80,7 +84,7 @@ public class PacketCodeC {
         buffer.readBytes(content);
 
         Class<? extends Packet> requestType = getRequestType(command);
-        Serializer serializer = getSerializer(serializerAlgorithm);;
+        Serializer serializer = getSerializer(serializerAlgorithm);
 
         if (requestType != null && serializer != null) {
             return serializer.deserialize(requestType, content);

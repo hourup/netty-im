@@ -1,10 +1,11 @@
 package com.changhr.netty.im.netty.handler.server;
 
-import com.changhr.netty.im.netty.pack.CreateGroupRequestPacket;
-import com.changhr.netty.im.netty.pack.CreateGroupResponsePacket;
+import com.changhr.netty.im.netty.pack.client.CreateGroupRequestPacket;
+import com.changhr.netty.im.netty.pack.server.CreateGroupResponsePacket;
 import com.changhr.netty.im.netty.utils.IDUtil;
 import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.channel.group.DefaultChannelGroup;
@@ -16,7 +17,14 @@ import java.util.List;
  * @author changhr2013
  * @date 2019/7/13
  */
+@ChannelHandler.Sharable
 public class CreateGroupRequestHandler extends SimpleChannelInboundHandler<CreateGroupRequestPacket> {
+
+    public static final CreateGroupRequestHandler INSTANCE = new CreateGroupRequestHandler();
+
+    protected CreateGroupRequestHandler() {
+    }
+
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, CreateGroupRequestPacket createGroupReqPacket) throws Exception {
         List<String> userIdList = createGroupReqPacket.getUserIdList();

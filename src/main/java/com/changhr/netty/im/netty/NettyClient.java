@@ -4,6 +4,7 @@ import com.changhr.netty.im.netty.command.ConsoleCommandManager;
 import com.changhr.netty.im.netty.command.LoginConsoleCommand;
 import com.changhr.netty.im.netty.handler.*;
 import com.changhr.netty.im.netty.handler.client.*;
+import com.changhr.netty.im.netty.handler.server.IMIdleStateHandler;
 import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
@@ -36,8 +37,11 @@ public class NettyClient {
                     @Override
                     protected void initChannel(NioSocketChannel nioSocketChannel) throws Exception {
                         ChannelPipeline pipeline = nioSocketChannel.pipeline();
+
+                        pipeline.addLast(new IMIdleStateHandler());
                         pipeline.addLast(new Splitter());
-                        pipeline.addLast(PacketDecoder.INSTANCE);
+                        pipeline.addLast(PacketCodecHandler.INSTANCE);
+
                         pipeline.addLast(new LoginResponseHandler());
                         pipeline.addLast(new CreateGroupResponseHandler());
                         pipeline.addLast(new MessageResponseHandler());
@@ -46,7 +50,8 @@ public class NettyClient {
                         pipeline.addLast(new QuitGroupResponseHandler());
                         pipeline.addLast(new ListGroupMembersResponseHandler());
                         pipeline.addLast(new LogoutResponseHandler());
-                        pipeline.addLast(PacketEncoder.INSTANCE);
+
+                        pipeline.addLast(new HeartBeatTimerHandler());
                     }
                 });
 

@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.command;
 
-import com.changhr.netty.im.netty.pack.ListGroupMembersRequestPacket;
+import com.changhr.netty.im.netty.pack.client.ListGroupMembersRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;

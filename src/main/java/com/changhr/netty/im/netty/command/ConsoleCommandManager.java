@@ -8,10 +8,11 @@ import java.util.Scanner;
 
 /**
  * 控制台操作管理类
+ *
  * @author changhr2013
  * @date 2019/7/13
  */
-public class ConsoleCommandManager implements ConsoleCommand{
+public class ConsoleCommandManager implements ConsoleCommand {
 
     private Map<String, ConsoleCommand> consoleCommandMap;
 

@@ -1,7 +1,7 @@
 package com.changhr.netty.im.netty.handler.server;
 
-import com.changhr.netty.im.netty.pack.LoginRequestPacket;
-import com.changhr.netty.im.netty.pack.LoginResponsePacket;
+import com.changhr.netty.im.netty.pack.client.LoginRequestPacket;
+import com.changhr.netty.im.netty.pack.server.LoginResponsePacket;
 import com.changhr.netty.im.netty.session.UserSession;
 import com.changhr.netty.im.netty.utils.IDUtil;
 import com.changhr.netty.im.netty.utils.SessionUtil;

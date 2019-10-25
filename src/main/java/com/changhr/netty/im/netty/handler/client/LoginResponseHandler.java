@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.handler.client;
 
-import com.changhr.netty.im.netty.pack.LoginResponsePacket;
+import com.changhr.netty.im.netty.pack.server.LoginResponsePacket;
 import com.changhr.netty.im.netty.session.UserSession;
 import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,12 +17,6 @@ public class LoginResponseHandler extends SimpleChannelInboundHandler<LoginRespo
     @Override
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         System.out.println(Instant.now().toString() + ": client connect...");
-
-//        LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-//        loginRequestPacket.setUsername("changhr")
-//                .setPassword("pwd");
-//
-//        ctx.channel().writeAndFlush(loginRequestPacket);
     }
 
     @Override

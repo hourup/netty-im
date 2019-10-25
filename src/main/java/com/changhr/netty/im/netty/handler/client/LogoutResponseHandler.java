@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.handler.client;
 
-import com.changhr.netty.im.netty.pack.LogoutResponsePacket;
+import com.changhr.netty.im.netty.pack.server.LogoutResponsePacket;
 import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

@@ -1,5 +1,7 @@
-package com.changhr.netty.im.netty.pack;
+package com.changhr.netty.im.netty.pack.server;
 
+import com.changhr.netty.im.netty.pack.Command;
+import com.changhr.netty.im.netty.pack.Packet;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

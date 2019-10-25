@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.command;
 
-import com.changhr.netty.im.netty.pack.CreateGroupRequestPacket;
+import com.changhr.netty.im.netty.pack.client.CreateGroupRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Arrays;
@@ -13,6 +13,7 @@ import java.util.Scanner;
 public class CreateGroupConsoleCommand implements ConsoleCommand {
 
     private static final String USER_ID_SPLITTER = ",";
+
         @Override
         public void exec(Scanner scanner, Channel channel) {
             CreateGroupRequestPacket createGroupReqPacket = new CreateGroupRequestPacket();

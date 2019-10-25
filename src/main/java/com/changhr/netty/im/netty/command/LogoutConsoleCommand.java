@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.command;
 
-import com.changhr.netty.im.netty.pack.LogoutRequestPacket;
+import com.changhr.netty.im.netty.pack.client.LogoutRequestPacket;
 import io.netty.channel.Channel;
 
 import java.util.Scanner;

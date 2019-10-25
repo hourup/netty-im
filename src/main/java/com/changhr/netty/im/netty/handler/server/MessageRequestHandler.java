@@ -1,10 +1,11 @@
 package com.changhr.netty.im.netty.handler.server;
 
-import com.changhr.netty.im.netty.pack.MessageRequestPacket;
-import com.changhr.netty.im.netty.pack.MessageResponsePacket;
+import com.changhr.netty.im.netty.pack.client.MessageRequestPacket;
+import com.changhr.netty.im.netty.pack.server.MessageResponsePacket;
 import com.changhr.netty.im.netty.session.UserSession;
 import com.changhr.netty.im.netty.utils.SessionUtil;
 import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
@@ -14,7 +15,12 @@ import java.time.Instant;
  * @author changhr
  * @create 2019-07-12 10:39
  */
+@ChannelHandler.Sharable
 public class MessageRequestHandler extends SimpleChannelInboundHandler<MessageRequestPacket> {
+
+    public static final MessageRequestHandler INSTANCE = new MessageRequestHandler();
+
+    protected MessageRequestHandler(){}
 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, MessageRequestPacket messageReqPacket) throws Exception {

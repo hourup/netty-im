@@ -1,6 +1,6 @@
 package com.changhr.netty.im.netty.handler.client;
 
-import com.changhr.netty.im.netty.pack.GroupMessageResponsePacket;
+import com.changhr.netty.im.netty.pack.server.GroupMessageResponsePacket;
 import com.changhr.netty.im.netty.session.UserSession;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

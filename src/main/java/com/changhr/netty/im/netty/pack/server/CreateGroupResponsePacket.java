@@ -1,5 +1,7 @@
-package com.changhr.netty.im.netty.pack;
+package com.changhr.netty.im.netty.pack.server;
 
+import com.changhr.netty.im.netty.pack.Command;
+import com.changhr.netty.im.netty.pack.Packet;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -11,7 +13,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class CreateGroupResponsePacket extends Packet{
+public class CreateGroupResponsePacket extends Packet {
 
     private boolean success;
 
