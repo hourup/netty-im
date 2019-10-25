@@ -42,6 +42,8 @@ public class NettyClient {
                         pipeline.addLast(new Splitter());
                         pipeline.addLast(PacketCodecHandler.INSTANCE);
 
+                        pipeline.addLast(new HeartBeatTimerHandler());
+
                         pipeline.addLast(new LoginResponseHandler());
                         pipeline.addLast(new CreateGroupResponseHandler());
                         pipeline.addLast(new MessageResponseHandler());
@@ -50,8 +52,6 @@ public class NettyClient {
                         pipeline.addLast(new QuitGroupResponseHandler());
                         pipeline.addLast(new ListGroupMembersResponseHandler());
                         pipeline.addLast(new LogoutResponseHandler());
-
-                        pipeline.addLast(new HeartBeatTimerHandler());
                     }
                 });
 
