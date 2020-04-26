@@ -3,6 +3,7 @@ package com.changhr.netty.im.netty.pack;
 import com.changhr.netty.im.netty.pack.client.*;
 import com.changhr.netty.im.netty.pack.server.*;
 import com.changhr.netty.im.netty.serializer.JSONSerializer;
+import com.changhr.netty.im.netty.serializer.ProtoBufSerializer;
 import com.changhr.netty.im.netty.serializer.Serializer;
 import io.netty.buffer.ByteBuf;
 
@@ -56,6 +57,9 @@ public class PacketCodeC {
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializer();
         serializerMap.put(serializer.getSerializerAlgorithm(), serializer);
+
+        ProtoBufSerializer protoBufSerializer = new ProtoBufSerializer();
+        serializerMap.put(protoBufSerializer.getSerializerAlgorithm(), protoBufSerializer);
     }
 
     public ByteBuf encode(ByteBuf buffer, Packet packet) {

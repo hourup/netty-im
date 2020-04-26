@@ -43,8 +43,8 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             System.out.println("login valid success.");
             String userId = IDUtil.randomId();
             // 校验成功
-            loginRspPacket.setSuccess(true)
-                    .setUserId(userId);
+            loginRspPacket.setSuccess(true).setUserId(userId);
+
             System.out.println("[" + loginReqPacket.getUsername() + "]登录成功");
             SessionUtil.bindSession(new UserSession(userId, loginReqPacket.getUsername()), ctx.channel());
         } else {
@@ -52,6 +52,7 @@ public class LoginRequestHandler extends SimpleChannelInboundHandler<LoginReques
             // 校验失败
             loginRspPacket.setSuccess(false).setReason("账号密码校验失败！");
         }
+
         ctx.channel().writeAndFlush(loginRspPacket);
     }
 

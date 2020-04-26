@@ -6,7 +6,7 @@ package com.changhr.netty.im.netty.serializer;
  */
 public interface Serializer {
 
-    Serializer DEFAULT = new JSONSerializer();
+    Serializer DEFAULT = new ProtoBufSerializer();
 
     /** 序列化算法 */
     byte getSerializerAlgorithm();

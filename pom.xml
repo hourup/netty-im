@@ -16,8 +16,12 @@
 
     <properties>
         <java.version>1.8</java.version>
-        <netty.version>4.1.42.Final</netty.version>
-        <lombok.version>1.18.8</lombok.version>
+        <project.encoding>UTF-8</project.encoding>
+        <netty.version>4.1.49.Final</netty.version>
+        <lombok.version>1.18.12</lombok.version>
+        <fastjson.version>1.2.68</fastjson.version>
+        <objenesis.version>3.1</objenesis.version>
+        <protostuff.version>1.7.2</protostuff.version>
     </properties>
 
     <dependencies>
@@ -33,6 +37,30 @@
         </dependency>
 
         <dependency>
+            <groupId>org.objenesis</groupId>
+            <artifactId>objenesis</artifactId>
+            <version>${objenesis.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-core</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.protostuff</groupId>
+            <artifactId>protostuff-runtime</artifactId>
+            <version>${protostuff.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>${lombok.version}</version>
@@ -43,11 +71,6 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <version>1.2.58</version>
         </dependency>
     </dependencies>
 
@@ -62,10 +85,11 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.8.0</version>
+                <version>3.8.1</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
+                    <encoding>${project.encoding}</encoding>
                     <annotationProcessorPaths>
                         <path>
                             <groupId>org.projectlombok</groupId>
