@@ -2,33 +2,25 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <parent>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.6.RELEASE</version>
-        <relativePath/> <!-- lookup parent from repository -->
-    </parent>
+
     <groupId>com.changhr.netty</groupId>
     <artifactId>netty-im</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+
     <name>netty-im</name>
-    <description>netty-im project for Spring Boot</description>
+    <description>netty-im project</description>
 
     <properties>
         <java.version>1.8</java.version>
         <project.encoding>UTF-8</project.encoding>
-        <netty.version>4.1.49.Final</netty.version>
-        <lombok.version>1.18.12</lombok.version>
+        <netty.version>4.1.80.Final</netty.version>
+        <lombok.version>1.18.24</lombok.version>
         <fastjson.version>1.2.83</fastjson.version>
-        <objenesis.version>3.1</objenesis.version>
-        <protostuff.version>1.7.2</protostuff.version>
+        <objenesis.version>3.3</objenesis.version>
+        <protostuff.version>1.8.0</protostuff.version>
     </properties>
 
     <dependencies>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
-        </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>
@@ -68,19 +60,15 @@
         </dependency>
 
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
 
     <build>
         <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-
             <!-- lombok Maven 支持 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
